@@ -11,10 +11,10 @@ data "aws_ami" "os_image" {
   }
 }
 
-resource "aws_key_pair" "deployer" {
-  key_name   = "terra-automate-key"
-  public_key = file("terra-key.pub")
-}
+# resource "aws_key_pair" "deployer" {
+#   key_name   = "terra-automate-key"
+#   public_key = file("terra-key.pub")
+# }
 
 resource "aws_default_vpc" "default" {
 
@@ -69,18 +69,18 @@ resource "aws_security_group" "allow_user_to_connect" {
   }
 }
 
-resource "aws_instance" "testinstance" {
-  ami             = data.aws_ami.os_image.id
-  instance_type   = var.instance_type 
-  key_name        = aws_key_pair.deployer.key_name
-  security_groups = [aws_security_group.allow_user_to_connect.name]
+# resource "aws_instance" "testinstance" {
+#   ami             = data.aws_ami.os_image.id
+#   instance_type   = var.instance_type 
+#   key_name        = aws_key_pair.deployer.key_name
+#   security_groups = [aws_security_group.allow_user_to_connect.name]
 
-  tags = {
-    Name = "Jenkins-Automate"
-  }
+#   tags = {
+#     Name = "Jenkins-Automate"
+#   }
 
-  root_block_device {
-    volume_size = 20
-    volume_type = "gp3"
-  }
-}
+#   root_block_device {
+#     volume_size = 20
+#     volume_type = "gp3"
+#   }
+# }
